@@ -6,6 +6,13 @@ let reports = 0;
 let costSavings = 0;
 let timeSavings = 0;
 
+// Month-to-month expense data
+let monthlyData = {
+  "Jan": 0, "Feb": 0, "Mar": 0, "Apr": 0,
+  "May": 0, "Jun": 0, "Jul": 0, "Aug": 0,
+  "Sep": 0, "Oct": 0, "Nov": 0, "Dec": 0
+};
+
 // Categorization
 function categorize(desc) {
   desc = desc.toLowerCase();
@@ -46,6 +53,31 @@ function updateReportsDashboard() {
   document.getElementById("time-savings").textContent = timeSavings;
 }
 
+// ===== Chart.js Setup =====
+const ctx = document.getElementById("expensesChart").getContext("2d");
+const expensesChart = new Chart(ctx, {
+  type: "bar",
+  data: {
+    labels: Object.keys(monthlyData),
+    datasets: [{
+      label: "Expenses ($)",
+      data: Object.values(monthlyData),
+      backgroundColor: "#4f46e5"
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false }
+    },
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
 // Add Expense
 document.getElementById("expense-form").addEventListener("submit", function(e) {
   e.preventDefault();
@@ -65,6 +97,16 @@ document.getElementById("expense-form").addEventListener("submit", function(e) {
   if (activity.innerHTML.includes("No data")) activity.innerHTML = "";
   activity.innerHTML += `<li>Report generated for: ${desc} ($${amount})</li>`;
 
+  // Update monthly data (using current month)
+  let now = new Date();
+  let monthName = now.toLocaleString("default", { month: "short" });
+  monthlyData[monthName] += amount;
+
+  // Update chart
+  expensesChart.data.datasets[0].data = Object.values(monthlyData);
+  expensesChart.update();
+
+  // Reset inputs
   document.getElementById("expense-desc").value = "";
   document.getElementById("expense-amount").value = "";
 
