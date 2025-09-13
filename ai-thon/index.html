@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Finance & Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🎓 Student Finance & AI Dashboard</h1>
+    <p>Track, Predict & Control Your Spending</p>
+  </header>
+
+  <main>
+    <!-- Finance Tracker -->
+    <section class="card">
+      <h2>Add Expense</h2>
+      <form id="expense-form">
+        <input type="text" id="expense-desc" placeholder="e.g. Pizza, Bus Ticket" required>
+        <input type="number" id="expense-amount" placeholder="Amount" required>
+        <button type="submit">Add</button>
+      </form>
+      <p id="category-output"></p>
+    </section>
+
+    <section class="card">
+      <h2>📊 Finance Dashboard</h2>
+      <div id="dashboard">
+        <p><strong>Total Spent:</strong> $<span id="total-spent">0</span></p>
+        <p><strong>Predicted Monthly Spend:</strong> $<span id="predicted-spend">0</span></p>
+        <p><strong>Budget:</strong> $<span id="budget">500</span></p>
+        <p id="alert" class="alert"></p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🎯 Goals</h2>
+      <form id="goal-form">
+        <input type="text" id="goal-name" placeholder="Goal (e.g. Laptop)">
+        <input type="number" id="goal-amount" placeholder="Target Amount">
+        <button type="submit">Set Goal</button>
+      </form>
+      <ul id="goals-list"></ul>
+    </section>
+
+    <section class="card">
+      <h2>🧾 Expense History</h2>
+      <ul id="expense-list"></ul>
+    </section>
+
+    <!-- Reports Dashboard -->
+    <section class="card wide">
+      <h2>📌 AI Dashboard Overview</h2>
+      <div class="overview">
+        <div class="overview-box">
+          <h3>Reports</h3>
+          <p id="reports-count">0</p>
+        </div>
+        <div class="overview-box">
+          <h3>Cost Savings</h3>
+          <p id="cost-savings">$0.00</p>
+        </div>
+        <div class="overview-box">
+          <h3>Time Savings</h3>
+          <p id="time-savings">0</p>
+        </div>
+      </div>
+
+      <h3>Activity</h3>
+      <ul id="activity-list">
+        <li>No data</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
